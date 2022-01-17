@@ -36,7 +36,7 @@ baml:parse2bash() {
     command -v tr &> /dev/null || return 1
     
     # Define arguments
-    local ARGUMENT_TOKEN=";"
+    local VARIABLE_TOKEN=";"
     local ARRAY_TOKEN="->"
 
     # Main code block
@@ -44,14 +44,14 @@ baml:parse2bash() {
         local BAML_MAXLINE="$(awk 'END { print NR }' "${1}")"
         for BAML_LINENO in $(seq 1 "${BAML_MAXLINE}") ; do
             local BAML_SETLINE="$(awk "NR==${BAML_LINENO}" "${1}")"
-            if  [[ "$(echo "${BAML_SETLINE}" | awk '{printf $1}')" = *"${ARGUMENT_TOKEN}" ]] ; then
-                echo -n "$(echo "${BAML_SETLINE}" | awk '{printf $1}' | tr "${ARGUMENT_TOKEN}" "=")( "
+            if  [[ "$(echo "${BAML_SETLINE}" | awk '{printf $1}')" = *"${VARIABLE_TOKEN}" ]] ; then
+                echo -n "$(echo "${BAML_SETLINE}" | awk '{printf $1}' | tr "${VARIABLE_TOKEN}" "=")( "
                 while true ; do
                     BAML_LINENO="$(("${BAML_LINENO}" + 1))"
                     local BAML_SETLINE="$(awk "NR==${BAML_LINENO}" "${1}")"
                     if [[ "$(echo "${BAML_SETLINE}" | awk '{print $1}')" = "${ARRAY_TOKEN}" ]] ; then
                         echo -n "'$(echo "${BAML_SETLINE}" | awk '{$1=""; print $0}' | sed 's/ //' )' "
-                    elif [[ "$(echo "${BAML_SETLINE}" | awk '{printf $1}')" = *"${ARGUMENT_TOKEN}" ]] ; then
+                    elif [[ "$(echo "${BAML_SETLINE}" | awk '{printf $1}')" = *"${VARIABLE_TOKEN}" ]] ; then
                         break
                     elif [[ "${BAML_LINENO}" -ge "${BAML_MAXLINE}" ]] ; then
                         echo ")"
