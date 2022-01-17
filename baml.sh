@@ -70,5 +70,3 @@ baml:parse2py() {
     # coming soon
     :
 }
-
-baml:parse2bash "${1}"
