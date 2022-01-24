@@ -31,4 +31,4 @@ clean:
 	$(clean)
 
 test:
-	$(test_baml)
+	@$(test_baml)
