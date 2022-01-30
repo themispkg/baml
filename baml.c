@@ -41,6 +41,36 @@ size_t	valid_token(char *store)
 	return (0);
 }
 
+void	pitem(char *istr)
+{
+	size_t			isize = strlen(istr);
+	size_t			scan = 0;
+	size_t			checkp = 0;
+	size_t			trimmer = 0;
+	unsigned char	memory = 0;
+
+	while (scan < isize)
+	{
+		if (istr[scan] > 32 )
+			trimmer = scan;
+		if (istr[scan] == '\'' || istr[scan] == '\"' || istr[scan] == '`')
+		{
+			memory = istr[scan];
+			istr[scan] = 0;
+			printf("%s\\%c", &istr[checkp], memory);
+			istr[scan] = memory;
+			checkp = ++scan;
+			continue ;
+		}
+		scan++;
+	}
+	istr[trimmer + 1]  = 0;
+	if (memory == 0)
+		printf("%s", istr);
+	else if (scan != checkp)
+		printf("%s", &istr[checkp]);
+}
+
 void	pheader(char *hstr, char **format, char *hopen)
 {
 	size_t	scan;
@@ -59,7 +89,8 @@ void	pheader(char *hstr, char **format, char *hopen)
 	}
 	if (*hopen)
 		printf("%s\n", format[3]);
-	printf("%s%s", hstr, format[0]);
+	pitem(hstr);
+	printf("%s", format[0]);
 	*hopen = 1;
 }
 
@@ -83,7 +114,9 @@ void	pentry(char *estr, char **format, char *hopen)
 		printf("%s", format[1]);
 	else
 		*hopen = 2;
-	printf("%s%s%s", format[2], estr, format[2]);
+	printf("%s", format[2]);
+	pitem(estr);
+	printf("%s", format[2]);
 }
 
 size_t	dstr(char *base, char *tail)

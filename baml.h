@@ -18,6 +18,8 @@
  * "pentry" takes the line "hstr" comprising a valid token and prints entry
  * output according to the "format"; "hopen" is passed 1 when there is no
  * previous entry in the header, it is set to 2 when an entry is inserted.
+ * "pitem" takes the target string and prints it by adding '\' for any quote
+ * character and trimming the end of it.
  * "dstr" takes a "base" string and concatenates "tail" by dynamically
  * allocating memory. this function is used to store a complete line from
  * the file.
@@ -25,6 +27,7 @@
 
 char	**valid_arg(char *arg);
 size_t	valid_token(char *store);
+void	pitem(char *istr);
 void	pheader(char *hstr, char **format, char *hopen);
 void	pentry(char *estr, char **format, char *hopen);
 size_t	dstr(char *base, char *tail);

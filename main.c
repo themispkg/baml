@@ -48,11 +48,11 @@ int	main(int ac, char **av)
 					{
 						pheader(store, format, &hopen);
 					}
-					else if (stcursor = valid_token(store))
+					else if ((stcursor = valid_token(store)))
 					{
 						if(!hopen)
 						{
-							printf("Incomplete entry at line %d\n", lfile);
+							printf("Incomplete entry at line %ld\n", lfile);
 							return (1);
 						}
 						pentry(&store[stcursor], format, &hopen);
