@@ -1,6 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include "baml.h"
+#include "libbaml/baml.h"
 
 int	main(int ac, char **av)
 {
