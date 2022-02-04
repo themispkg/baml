@@ -1,5 +1,5 @@
 define build_baml
-	gcc main.c -o baml
+	gcc main.c baml.c -o baml
 endef
 
 define test_baml
@@ -12,14 +12,11 @@ endef
 
 build:
 	$(build_baml)
-	@cp libbaml/baml.h /usr/include/
-	
 
 install:
 	$(build_baml)
 	install -m 755 ./baml /usr/bin/baml
 	@$(test_baml)
-	@cp libbaml/baml.h /usr/include/
 
 uninstall:
 	rm /usr/bin/baml
