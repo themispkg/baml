@@ -6,7 +6,7 @@
 
 struct entry_s {
     char *section;
-    char *entry_cm[];
+    char *entry_cm;
 };
 
 int write_section(char *baml_f, struct entry_s entry){
