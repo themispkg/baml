@@ -1,6 +1,8 @@
 # baml 1.0.0 - C
 baml ain't markup language
 
+![themispkg](https://user-images.githubusercontent.com/54551308/152642654-7400989a-de20-4c06-8030-96db6cd4a4cd.png)
+
 # installation
 ```
 git clone https://github.com/themispkg/baml.git ; cd baml && sudo make install
