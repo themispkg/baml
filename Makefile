@@ -16,6 +16,7 @@ build:
 	$(build_baml)
 	@cp libbaml/baml.h /usr/include/
 	@cp libbaml/read.h /usr/include
+	@cp libbaml/write.h /usr/include
 
 install:
 	$(build_baml)
@@ -23,6 +24,7 @@ install:
 	@$(test_baml)
 	@cp libbaml/baml.h /usr/include/
 	@cp libbaml/read.h /usr/include/
+	@cp libbaml/write.h /usr/include
 	@echo "Installed perfectly!!!"
 uninstall:
 	rm /usr/bin/baml
