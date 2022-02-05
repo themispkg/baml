@@ -1,5 +1,7 @@
+#pragma once
 #include <stdio.h>
 #include <stdlib.h>
+#include <baml.h>
 
 char *read_entry(int argc, char *argv[]){
 	FILE	*fp;
