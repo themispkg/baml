@@ -22,7 +22,7 @@ static void	check_header(t_fstate *fstate, char *line, ssize_t len)
 	term_index = find_index(line, ';');
 	if (term_index != -1 && term_index != len - 1)
 		fstate->invalid = 1;
-	else if (term_index == len - 1)
+	else if (len > 0 && term_index == len - 1)
 	{
 		if (len == 1)
 			fstate->invalid = 1;
