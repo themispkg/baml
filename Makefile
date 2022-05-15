@@ -1,42 +1,28 @@
-define build_baml
-	@gcc main.c -o baml -w
-	@echo "Compiled"
-endef
+CC=gcc
+CFLAGS=-Wall -Wextra -Werror
+INC_PATH=include
+SRC_PATH=src
+OBJ_PATH=obj
+SRCS=baml.c arg_checks.c read_file.c prints.c errors.c \
+	 contain_check.c find_index.c
+OBJS=$(SRCS:.c=.o)
+OBJ_FILE=$(foreach item, $(OBJS), $(addprefix $(OBJ_PATH)/, $(item)))
+NAME=baml
 
-define test_baml
-	@echo "Testing:"
-	/usr/bin/baml --bash ./example.baml
-endef
+all: $(NAME)
 
-define clean
-	rm ./baml
-endef
+$(NAME): $(OBJ_PATH) $(OBJ_FILE)
+	$(CC) $(CFLAGS) -o $@ $(OBJ_FILE)
 
-build:
-	$(build_baml)
-	@cp libbaml/baml.h /usr/include/
-	@cp libbaml/read.h /usr/include
-	@cp libbaml/write.h /usr/include
+$(OBJ_PATH):
+	mkdir -p $(OBJ_PATH)
 
-install:
-	$(build_baml)
-	install -m 755 ./baml /usr/bin/baml
-	@$(test_baml)
-	@cp libbaml/baml.h /usr/include/
-	@cp libbaml/read.h /usr/include/
-	@cp libbaml/write.h /usr/include
-	@echo "Installed perfectly!!!"
-uninstall:
-	rm /usr/bin/baml
+$(OBJ_PATH)/%.o: $(SRC_PATH)/%.c
+	$(CC) $(CFLAGS) -I $(INC_PATH) -c -o $@ $^
 
-reinstall:
-	$(clean)
-	$(build_baml)
-	install -m 755 ./baml /usr/bin/baml
-	@$(test_baml)
-
+re: fclean all
+fclean: clean
+	rm -rf $(OBJ_PATH)
 clean:
-	$(clean)
-
-test:
-	@$(test_baml)
+	rm -rf $(NAME)
+.PHONY: all clean fclean re
