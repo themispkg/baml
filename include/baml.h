@@ -1,10 +1,12 @@
 #ifndef BAML_H
 # define BAML_H
 
-#include <stdio.h>
-#include <stdlib.h>
-#include <ctype.h>
-#include <string.h>
+# include <stdio.h>
+# include <stdlib.h>
+# include <ctype.h>
+# include <string.h>
+
+# define INV_REPLACE '_'
 
 typedef struct	s_fstate
 {

@@ -9,7 +9,7 @@ static void	pass_space(char **line, ssize_t *len)
 	}
 }
 
-static void	parse_line(char *line, ssize_t len)
+static void	parse_line(t_fstate *state, char *line, ssize_t len)
 {
 	ssize_t check_p;
 	ssize_t scan;
@@ -27,6 +27,8 @@ static void	parse_line(char *line, ssize_t len)
 			line[scan] = temp;
 			check_p = scan + 1;
 		}
+		else if (state->is_header && !isalnum(line[scan]))
+			line[scan] = INV_REPLACE;
 		scan++;
 	}
 	printf("%s", &line[check_p]);
@@ -38,7 +40,7 @@ void	print_header(t_fstate *state, char const **fmt, char *line, ssize_t len)
 	line[--len] = 0;
 	if (state->has_header)
 		printf("%s\n", fmt[3]);
-	parse_line(line, len);
+	parse_line(state, line, len);
 	printf("%s", fmt[0]);
 	state->has_header = 1;
 	state->has_entry = 0;
@@ -53,7 +55,7 @@ void	print_entry(t_fstate *state, char const **fmt, char *line, ssize_t len)
 	if (state->has_entry)
 		printf("%s", fmt[1]);
 	printf("%s", fmt[2]);
-	parse_line(line, len);
+	parse_line(state, line, len);
 	printf("%s", fmt[2]);
 	state->has_entry = 1;
 }
