@@ -27,7 +27,7 @@ deneme123;
     -> oldu
 ```
 
-# NOT
+# NOTE:
 also you can change the **ENTRY TOKEN** and the **HEADER TOKEN** as you want
 ![image](https://user-images.githubusercontent.com/54551308/150812543-44142918-a950-438c-b258-ff5458fdde6f.png)
 
